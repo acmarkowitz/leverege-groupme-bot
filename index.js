@@ -28,6 +28,7 @@ var server = http.createServer(function (request, response) {
         request.on('end', function () {
                    console.log("Data end");
                    var post = qs.parse(body);
+                   body = '';
                    // use post['blah'], etc.
                    });
  
