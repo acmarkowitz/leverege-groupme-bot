@@ -6,25 +6,14 @@ var http = require('http');
 
 var server = http.createServer(function (request, response) {
     console.log("Request method is: " + request.method);
-    var body = '';
+    var body;
                                
     if (request.method == 'POST') {
         request.on('data', function (data) {
                    body = JSON.parse(data);
-                   //console.log("\nreceiving data\n");
-                   //console.log(data);
-                   // Too much POST data, kill the connection!
-                   // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
-                   /*if (body.length > 1e9)
-                   request.connection.destroy();
-                    */
                    });
         request.on('end', function () {
-                   //console.log("Data end\n");
-                   //var post = qs.parse(body);
-                   console.log(body.text);
-                   //body = '';
-                   // use post['blah'], etc.
+                   console.log(body.text);]
                    });
     }
     response.statusCode = 400;
