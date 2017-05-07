@@ -15,7 +15,8 @@ var server = http.createServer(function (request, response) {
  
         request.on('data', function (data) {
                    body += data;
-                   
+                   console.log("\nreceiving data\n");
+                   console.log(data);
                    // Too much POST data, kill the connection!
                    // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
                    if (body.length > 1e6)
@@ -23,6 +24,7 @@ var server = http.createServer(function (request, response) {
                    });
         
         request.on('end', function () {
+                   console.log("Data end");
                    var post = qs.parse(body);
                    // use post['blah'], etc.
                    });
