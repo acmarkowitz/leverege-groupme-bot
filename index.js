@@ -9,7 +9,9 @@ var server = http.createServer(function (request, response) {
     console.log(request.method);
                                
     if (request.method == 'POST') {
-        console.log("boolean worked");
+        var headers = request.headers;
+        console.log(headers);
+                               
         /*
         request.on('data', function (data) {
                    body += data;
