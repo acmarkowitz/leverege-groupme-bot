@@ -54,10 +54,11 @@ http.createServer(function(request, response) {
                                          // response.writeHead(200, {'Content-Type': 'application/json'})
                                          
                                          var responseBody = {
-                                         headers: headers,
-                                         method: method,
-                                         url: url,
-                                         body: body
+                                         //headers: headers,
+                                         //method: method,
+                                         url: 'https://api.groupme.com/v3/bots/post',
+                                         body: {"bot_id" : "2ae846f9593ef32b98600483ea"
+                                         "text" : "Hello World"}
                                          };
                                          
                                          response.write(JSON.stringify(responseBody));
