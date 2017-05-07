@@ -1,25 +1,25 @@
-var cool = require('cool-ascii-faces');
-var express = require('express');
-var app = express();
+/* HTTP-post input handling from answer 2 at 
+ http://stackoverflow.com/questions/4295782/how-do-you-extract-post-data-in-node-js
+ */
+var qs = require('querystring');
 
-app.set('port', (process.env.PORT || 5000));
-
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/', function(request, response) {
-  response.render('pages/index');
-});
-
-app.get('/cool', function(request, response) {
-        response.send(cool());
-        });
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
-
-
+function (request, response) {
+    if (request.method == 'POST') {
+        var body = '';
+        
+        request.on('data', function (data) {
+                   body += data;
+                   
+                   // Too much POST data, kill the connection!
+                   // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
+                   if (body.length > 1e6)
+                   request.connection.destroy();
+                   });
+        
+        request.on('end', function () {
+                   var post = qs.parse(body);
+                   // use post['blah'], etc.
+                   });
+    }
+}
+console.log(post.text);
