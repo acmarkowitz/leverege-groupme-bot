@@ -57,7 +57,7 @@ http.createServer(function(request, response) {
                                          //headers: headers,
                                          //method: method,
                                          url: 'https://api.groupme.com/v3/bots/post',
-                                         body: {"bot_id" : "2ae846f9593ef32b98600483ea"
+                                         body: {"bot_id" : "2ae846f9593ef32b98600483ea",
                                          "text" : "Hello World"}
                                          };
                                          
