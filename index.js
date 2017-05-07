@@ -21,8 +21,9 @@ var server = http.createServer(function (request, response) {
                    // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
                    /*if (body.length > 1e9)
                    request.connection.destroy();
-                   });
                     */
+                   });
+                    
         
         request.on('end', function () {
                    console.log("Data end");
