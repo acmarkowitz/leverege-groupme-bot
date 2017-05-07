@@ -2,10 +2,11 @@
  http://stackoverflow.com/questions/4295782/how-do-you-extract-post-data-in-node-js
  */
 var qs = require('querystring');
-var http = require('http');
+//var http = require('http');
 
-var server = http.createServer(function (request, response) {
+function (request, response) {
     console.log(request.method);
+                               
     if (request.method == 'POST') {
         var body = '';
         
@@ -24,6 +25,6 @@ var server = http.createServer(function (request, response) {
                    });
     }
     console.log(post.text);
-});
+}
 
 console.log("\nHello World");
