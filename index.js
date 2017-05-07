@@ -10,7 +10,7 @@ var server = http.createServer(function (request, response) {
                                
     if (request.method == 'POST') {
         request.on('data', function (data) {
-                   body =JSON.parse(data);
+                   body = JSON.parse(data);
                    //console.log("\nreceiving data\n");
                    //console.log(data);
                    // Too much POST data, kill the connection!
@@ -20,10 +20,10 @@ var server = http.createServer(function (request, response) {
                     */
                    });
         request.on('end', function () {
-                   console.log("Data end\n");
-                   var post = qs.parse(body);
-                   console.log(body);
-                   body = '';
+                   //console.log("Data end\n");
+                   //var post = qs.parse(body);
+                   console.log(body.text);
+                   //body = '';
                    // use post['blah'], etc.
                    });
     }
