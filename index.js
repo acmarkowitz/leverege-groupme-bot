@@ -3,17 +3,15 @@
  */
 var qs = require('querystring');
 var http = require('http');
-//var body = '';
-var request = require('request');
 
-var server = http.createServer(function (request, response) {
+/* var server = http.createServer(function (request, response) {
     console.log(request.method);
                                
     if (request.method == 'POST') {
         var headers = request.headers;
         console.log(headers);
                                
-        /*
+ 
         request.on('data', function (data) {
                    body += data;
                    
@@ -27,30 +25,48 @@ var server = http.createServer(function (request, response) {
                    var post = qs.parse(body);
                    // use post['blah'], etc.
                    });
-        */
-        var body = [];
-        request.on('data', function(chunk) {
-                   body.push(chunk);
-                   console.log(body);
-        }).on('end', function() {
-              body = Buffer.concat(body).toString();
-              
-              console.log(body);
-        // at this point, `body` has the entire request body stored in it as a string
-        });
-                               request.post(
-                                            'https://api.groupme.com/v3/bots/post',
-                                            { json: { bot_id: '2ae846f9593ef32b98600483ea',
-                                            text: 'Hello World'} },
-                                            function (error, response, body) {
-                                            if (!error && response.statusCode == 200) {
-                                            console.log(body)
-                                            }
-                                            }
-                                            );
+ 
     }
     response.statusCode = 404;
     response.end();
-}).listen(process.env.PORT || 5000);
+})
+*/
+http.createServer(function(request, response) {
+                  var headers = request.headers;
+                  var method = request.method;
+                  var url = request.url;
+                  var body = [];
+                  request.on('error', function(err) {
+                             console.error(err);
+                             }).on('data', function(chunk) {
+                                   body.push(chunk);
+                                   }).on('end', function() {
+                                         body = Buffer.concat(body).toString();
+                                         // BEGINNING OF NEW STUFF
+                                         
+                                         response.on('error', function(err) {
+                                                     console.error(err);
+                                                     });
+                                         
+                                         response.statusCode = 200;
+                                         response.setHeader('Content-Type', 'application/json');
+                                         // Note: the 2 lines above could be replaced with this next one:
+                                         // response.writeHead(200, {'Content-Type': 'application/json'})
+                                         
+                                         var responseBody = {
+                                         headers: headers,
+                                         method: method,
+                                         url: url,
+                                         body: body
+                                         };
+                                         
+                                         response.write(JSON.stringify(responseBody));
+                                         response.end();
+                                         // Note: the 2 lines above could be replaced with this next one:
+                                         // response.end(JSON.stringify(responseBody))
+                                         
+                                         // END OF NEW STUFF
+                                         });
+                  })..listen(process.env.PORT || 5000);
 
 console.log("\nHello World");
