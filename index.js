@@ -14,7 +14,13 @@ var server = http.createServer(function (request, response) {
                    }
                    );
         request.on('end', function () {
-                   console.log(body.text.toLocaleLowerCase());
+                   var text = body.text.toLocaleLowerCase();
+                   if (text.search("movie") != -1) {
+                   console.log("Yes");
+                   }
+                   else {
+                   console.log("No");
+                   }
                    }
                    );
     }
