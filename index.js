@@ -4,6 +4,7 @@
 var qs = require('querystring');
 var http = require('http');
 //var body = '';
+var request = require('request');
 
 var server = http.createServer(function (request, response) {
     console.log(request.method);
@@ -37,6 +38,16 @@ var server = http.createServer(function (request, response) {
               console.log(body);
         // at this point, `body` has the entire request body stored in it as a string
         });
+                               request.post(
+                                            'https://api.groupme.com/v3/bots/post',
+                                            { json: { bot_id: '2ae846f9593ef32b98600483ea'
+                                            text: 'Hello World'} },
+                                            function (error, response, body) {
+                                            if (!error && response.statusCode == 200) {
+                                            console.log(body)
+                                            }
+                                            }
+                                            );
     }
     response.statusCode = 404;
     response.end();
