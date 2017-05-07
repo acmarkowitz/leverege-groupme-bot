@@ -5,14 +5,10 @@ var qs = require('querystring');
 var http = require('http');
 
 var server = http.createServer(function (request, response) {
-    console.log(request.method);
+    console.log("Request method is: " + request.method);
     var body = '';
                                
     if (request.method == 'POST') {
-        var headers = request.headers;
-        console.log(headers);
-                               
- 
         request.on('data', function (data) {
                    body += data.toString();
                    console.log("\nreceiving data\n");
@@ -23,8 +19,6 @@ var server = http.createServer(function (request, response) {
                    request.connection.destroy();
                     */
                    });
-                    
-        
         request.on('end', function () {
                    console.log("Data end\n");
                    var post = qs.parse(body);
@@ -32,9 +26,8 @@ var server = http.createServer(function (request, response) {
                    body = '';
                    // use post['blah'], etc.
                    });
- 
     }
-    response.statusCode = 404;
+    response.statusCode = 400;
     response.end();
 }).listen(process.env.PORT || 5000);
 
