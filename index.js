@@ -23,8 +23,9 @@ var server = http.createServer(function (request, response) {
                    var post = qs.parse(body);
                    // use post['blah'], etc.
                    });
+                               
+        console.log(body);
     }
-    console.log(post.text);
     response.statusCode = 404;
     response.end();
 }).listen(process.env.PORT || 5000);
