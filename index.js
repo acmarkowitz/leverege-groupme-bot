@@ -40,7 +40,7 @@ var server = http.createServer(function (request, response) {
         });
                                request.post(
                                             'https://api.groupme.com/v3/bots/post',
-                                            { json: { bot_id: '2ae846f9593ef32b98600483ea'
+                                            { json: { bot_id: '2ae846f9593ef32b98600483ea',
                                             text: 'Hello World'} },
                                             function (error, response, body) {
                                             if (!error && response.statusCode == 200) {
