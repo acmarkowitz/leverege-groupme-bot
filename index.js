@@ -67,6 +67,6 @@ http.createServer(function(request, response) {
                                          
                                          // END OF NEW STUFF
                                          });
-                  })..listen(process.env.PORT || 5000);
+                  }).listen(process.env.PORT || 5000);
 
 console.log("\nHello World");
