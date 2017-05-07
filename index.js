@@ -6,6 +6,7 @@ var http = require('http');
 
 var server = http.createServer(function (request, response) {
     console.log(request.method);
+    var body = '';
                                
     if (request.method == 'POST') {
         var headers = request.headers;
