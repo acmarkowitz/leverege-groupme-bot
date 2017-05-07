@@ -3,14 +3,14 @@
  */
 var qs = require('querystring');
 var http = require('http');
-var body = '';
+//var body = '';
 
 var server = http.createServer(function (request, response) {
     console.log(request.method);
                                
     if (request.method == 'POST') {
         
-        
+        /*
         request.on('data', function (data) {
                    body += data;
                    
@@ -24,7 +24,15 @@ var server = http.createServer(function (request, response) {
                    var post = qs.parse(body);
                    // use post['blah'], etc.
                    });
-                               
+        */
+        var body = [];
+        request.on('data', function(chunk) {
+                   body.push(chunk);
+        }).on('end', function() {
+                   body = Buffer.concat(body).toString();
+        // at this point, `body` has the entire request body stored in it as a string
+        });
+                       
         console.log(body);
     }
     response.statusCode = 404;
