@@ -29,11 +29,11 @@ var server = http.createServer(function (request, response) {
         request.on('data', function(chunk) {
                    body.push(chunk);
         }).on('end', function() {
-                   body = Buffer.concat(body).toString();
+              body = Buffer.concat(body).toString();
+              
+              console.log(body);
         // at this point, `body` has the entire request body stored in it as a string
         });
-                       
-        console.log(body);
     }
     response.statusCode = 404;
     response.end();
