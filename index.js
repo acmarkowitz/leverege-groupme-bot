@@ -13,7 +13,7 @@ var server = http.createServer(function (request, response) {
                    body = JSON.parse(data);
                    });
         request.on('end', function () {
-                   console.log(body.text);]
+                   console.log(body.text);
                    });
     }
     response.statusCode = 400;
