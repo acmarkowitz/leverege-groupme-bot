@@ -5,8 +5,8 @@ var qs = require('querystring');
 var http = require('http');
 
 var server = http.createServer(function (request, response) {
+    console.log(request.method);
     if (request.method == 'POST') {
-        console.log("this far\n");
         var body = '';
         
         request.on('data', function (data) {
