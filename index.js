@@ -4,7 +4,7 @@
 var qs = require('querystring');
 var http = require('http');
 
-/* var server = http.createServer(function (request, response) {
+var server = http.createServer(function (request, response) {
     console.log(request.method);
                                
     if (request.method == 'POST') {
@@ -29,9 +29,9 @@ var http = require('http');
     }
     response.statusCode = 404;
     response.end();
-})
-*/
-http.createServer(function(request, response) {
+}).listen(process.env.PORT || 5000);
+
+/*http.createServer(function(request, response) {
                   var headers = request.headers;
                   var method = request.method;
                   var url = request.url;
@@ -69,5 +69,5 @@ http.createServer(function(request, response) {
                                          // END OF NEW STUFF
                                          });
                   }).listen(process.env.PORT || 5000);
-
+*/
 console.log("\nHello World");
