@@ -10,7 +10,7 @@ var server = http.createServer(function (request, response) {
                                
     if (request.method == 'POST') {
         request.on('data', function (data) {
-                   body += data.toString();
+                   body =JSON.parse(data);
                    //console.log("\nreceiving data\n");
                    //console.log(data);
                    // Too much POST data, kill the connection!
