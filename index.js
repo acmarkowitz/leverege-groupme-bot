@@ -3,6 +3,7 @@
  */
 var qs = require('querystring');
 var http = require('http');
+var request = require('request');
 
 var server = http.createServer(function (request, response) {
     console.log("Request method is: " + request.method);
