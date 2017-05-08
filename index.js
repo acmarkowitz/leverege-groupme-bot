@@ -52,7 +52,7 @@ function handleMDB(movieRes) {
     //movieRes.on("end", prepareMessage);
 }
 function prepareMessage(chunk) {
-    chunks.push(chunk);
+    //chunks.push(chunk);
     var movieBody = Buffer.concat(chunk);
     var res = JSON.parse(movieBody.toString());   // Format as JSON
     var numResults = res.results.length;          // Get number of movies
