@@ -31,7 +31,7 @@ function handleListening (servReq, servRep) {
     body = '';
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', addData,servRep.end());
+        servReq.on('data', addData);
         servReq.on('end', processMessage,servRep.end());
     }
     else {
@@ -54,12 +54,6 @@ function processMessage() {
         gmReq.write(toWrite); // Write the POST to the groupme chat
         gmReq.end();
     }
-}
-// Get the upcoming releases in the US when it is time; code from example on moviedb.org
-function getMovies() {
-    var movieReq = HTTPS.request(movieOptions, handleMDB);
-    movieReq.write("{}"); // Complete the request
-    movieReq.end();
 }
 function handleMDB(movieRes) {
     chunks = [];
