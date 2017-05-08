@@ -53,8 +53,8 @@ function handleMDB(movieRes) {
 }
 function prepareMessage(chunk) {
     //chunks.push(chunk);
-    var movieBody = Buffer.concat(chunk);
-    var res = JSON.parse(movieBody.toString());   // Format as JSON
+    //var movieBody = Buffer.concat(chunk);
+    var res = JSON.parse(chunk.toString());   // Format as JSON
     var numResults = res.results.length;          // Get number of movies
     for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
         groupmeRequest.text += res.results[i].release_date
