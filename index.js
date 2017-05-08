@@ -26,9 +26,7 @@ var groupmeRequest =
 function getMovies() {
     var movieReq = HTTPS.request(movieOptions, function (movieRes) {
        var chunks = [];
-       movieRes.on("data", function (chunk) {
-          chunks.push(chunk);
-       });
+       movieRes.on("data", pushChunks(chunks,chuck));
        movieRes.on("end", function () {
           var movieBody = Buffer.concat(chunks);
           var res = JSON.parse(movieBody.toString());   // Format as JSON
@@ -69,3 +67,7 @@ var server = http.createServer(function (servReq, servRep) {
     servRep.end();
     }
 }).listen(process.env.PORT || 5000);
+
+function pushChunks(chunks, chunk) {
+    chunks.push(chunk);
+}
