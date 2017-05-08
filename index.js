@@ -33,7 +33,7 @@ function handleListening (servReq, servRep) {
     if (servReq.method == 'POST') {
         console.log("There has been a post");
         servReq.on('data', addData);
-        servReq.on('end', processMessage(), servRep.end());
+        servReq.on('end', processMessage, servRep.end());
     }
     else {
         servRep.end();
@@ -45,7 +45,7 @@ function addData (data) { // Add the data to the list
 }
 function processMessage() {
     // make all message text lower case for easy comparison
-    console.log("Body data is:" + body +"|");
+    console.log("Body x is:" + body +"|");
     var text = JSON.parse(body).text.toLocaleLowerCase();
     body = ''; //reset body
     // If "movie" is in the text...
