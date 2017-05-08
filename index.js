@@ -33,24 +33,23 @@ function handleListening (servReq, servRep) {
     if (servReq.method == 'POST') {
         console.log("There has been a post");
         servReq.on('data', addData,servRep.end);
-        //servReq.on('end', processMessage, servRep.end());
     }
     else {
         servRep.end();
     }
 }
 function addData (data) { // Add the data to the list
+    /*
     console.log("New data is: " + data);
     body += data;
     processMessage();
-}
-function processMessage() {
     // make all message text lower case for easy comparison
     console.log("Body x is:" + body +"|");
-    var text = JSON.parse(body).text.toLocaleLowerCase();
+     */
+    var groupMeMessage = JSON.parse(data).text.toLocaleLowerCase();
     body = ''; //reset body
     // If "movie" is in the text...
-    if (text.search("movie") != -1) {
+    if (groupMeMessage.search("movie") != -1) {
         var movieReq = HTTPS.request(movieOptions, handleMDB);
         movieReq.write("{}"); // Complete the request
         movieReq.end();
@@ -61,6 +60,24 @@ function processMessage() {
         gmReq.end();
     }
 }
+/*
+function processMessage() {
+    // make all message text lower case for easy comparison
+    console.log("Body x is:" + body +"|");
+    var groupMeMessage = JSON.parse(body).text.toLocaleLowerCase();
+    body = ''; //reset body
+    // If "movie" is in the text...
+    if (groupMeMessage.search("movie") != -1) {
+        var movieReq = HTTPS.request(movieOptions, handleMDB);
+        movieReq.write("{}"); // Complete the request
+        movieReq.end();
+        var gmReq = HTTPS.request(options);
+        var toWrite = JSON.stringify(groupmeRequest);
+        console.log("Sending this to groupme: " + toWrite);
+        gmReq.write(toWrite); // Write the POST to the groupme chat
+        gmReq.end();
+    }
+}*/
 function handleMDB(movieRes) {
     chunks = [];
     movieRes.on("data", addChunk);
