@@ -26,7 +26,7 @@ var groupmeRequest =
 function getMovies() {
     var movieReq = HTTPS.request(movieOptions, function (movieRes) {
        var chunks = [];
-       movieRes.on("data", pushChunks(chunks,chuck));
+       movieRes.on("data", pushChunks(chunks));
        movieRes.on("end", function () {
           var movieBody = Buffer.concat(chunks);
           var res = JSON.parse(movieBody.toString());   // Format as JSON
