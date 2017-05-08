@@ -53,7 +53,7 @@ function processMessage() {
         movieReq.end();
         var gmReq = HTTPS.request(options);
         var toWrite = JSON.stringify(groupmeRequest);
-        console.log(toWrite);
+        console.log("Sending this to groupme: " + toWrite);
         gmReq.write(toWrite); // Write the POST to the groupme chat
         gmReq.end();
     }
