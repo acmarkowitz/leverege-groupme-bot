@@ -23,12 +23,11 @@ var groupmeRequest =
     text: "Upcoming releases:\n"
 };
 
-var body;
+var body = '';
 var chunks;
 // Run server to listen for groupme messages
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
-    body = '';
     console.log("request");
     // Has there been a post?
     if (servReq.method == 'POST') {
@@ -48,6 +47,7 @@ function processMessage() {
     // make all message text lower case for easy comparison
     console.log("Body data is:" + body +"|");
     var text = JSON.parse(body).text.toLocaleLowerCase();
+    body = ''; //reset body
     // If "movie" is in the text...
     if (text.search("movie") != -1) {
         var movieReq = HTTPS.request(movieOptions, handleMDB);
