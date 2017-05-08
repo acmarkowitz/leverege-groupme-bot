@@ -28,12 +28,12 @@ var server = http.createServer(function (request, response) {
        var chunks = [];
                                                            
        movieRes.on("data", function (chunk) {
-          chunks.push(JSON.stringify(chunk));
+          chunks.push(chunk);
        });
                                                            
        movieRes.on("end", function () {
           var movieBody = Buffer.concat(chunks);
-          console.log(movieBody.toString());
+          console.log(JSON.stringify(movieBody));
        });
     });
                                
