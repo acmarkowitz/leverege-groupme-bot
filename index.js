@@ -22,32 +22,20 @@ var groupmeRequest =
     bot_id: "2ae846f9593ef32b98600483ea",
     text: "Upcoming releases:\n"
 };
-
-var body = '';
 var chunks;
 // Run server to listen for groupme messages
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
-    console.log("request");
     // Has there been a post?
     if (servReq.method == 'POST') {
-        console.log("There has been a post");
-        servReq.on('data', addData,servRep.end);
+        servReq.on('data', wantMovies, servRep.end);
     }
     else {
         servRep.end();
     }
 }
-function addData (data) { // Add the data to the list
-    /*
-    console.log("New data is: " + data);
-    body += data;
-    processMessage();
-    // make all message text lower case for easy comparison
-    console.log("Body x is:" + body +"|");
-     */
+function wantMovies (data) {
     var groupMeMessage = JSON.parse(data).text.toLocaleLowerCase();
-    body = ''; //reset body
     // If "movie" is in the text...
     if (groupMeMessage.search("movie") != -1) {
         var movieReq = HTTPS.request(movieOptions, handleMDB);
@@ -60,30 +48,13 @@ function addData (data) { // Add the data to the list
         gmReq.end();
     }
 }
-/*
-function processMessage() {
-    // make all message text lower case for easy comparison
-    console.log("Body x is:" + body +"|");
-    var groupMeMessage = JSON.parse(body).text.toLocaleLowerCase();
-    body = ''; //reset body
-    // If "movie" is in the text...
-    if (groupMeMessage.search("movie") != -1) {
-        var movieReq = HTTPS.request(movieOptions, handleMDB);
-        movieReq.write("{}"); // Complete the request
-        movieReq.end();
-        var gmReq = HTTPS.request(options);
-        var toWrite = JSON.stringify(groupmeRequest);
-        console.log("Sending this to groupme: " + toWrite);
-        gmReq.write(toWrite); // Write the POST to the groupme chat
-        gmReq.end();
-    }
-}*/
 function handleMDB(movieRes) {
     chunks = [];
     movieRes.on("data", addChunk);
     movieRes.on("end", prepareMessage);
 }
 function addChunk(chunk) {
+    console.log("data from 1 chunk:" + chunk);
     chunks.push(chunk);
 }
 function prepareMessage() {
