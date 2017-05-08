@@ -50,15 +50,15 @@ var server = http.createServer(function (request, response) {
           body = JSON.parse(data);
        });
        request.on('end', function () {
-          getMovies();
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
               console.log("Yes");
-              var req = HTTPS.request(options); //, callback);
+              getMovies();
+              var gmReq = HTTPS.request(options); //, callback);
               var toWrite = JSON.stringify(groupmeRequest);
-              req.write(toWrite);
+              gmReq.write(toWrite);
               //console.log(toWrite);
-              req.end();
+              gmReq.end();
           }
           else {
              console.log("No");
