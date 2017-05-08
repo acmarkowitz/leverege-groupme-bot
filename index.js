@@ -28,7 +28,7 @@ function handleListening (servReq, servRep) {
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
         servRep.writeHead(200);
-        servRep.end();
+        setTimeout(servRep.end(),10000);
     }
     else {
         servRep.end();
