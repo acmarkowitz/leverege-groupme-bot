@@ -44,13 +44,14 @@ function getMovies() {
     movieReq.write("{}"); // Complete the request
     movieReq.end();
 }
+var body = '';
 // Run server to listen for groupme messages
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
-    var body = '';
+    //var body = '';
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', addData(body));
+        servReq.on('data', addData);
         servReq.on('end', function () {
                    // make all message text lower case for easy comparison
                    var text = JSON.parse(body).text.toLocaleLowerCase();
@@ -68,6 +69,6 @@ function handleListening (servReq, servRep) {
         servRep.end();
     }
 }
-function addData (data,body) { // Add the data to the list
+function addData (data) { // Add the data to the list
     body += data;
 }
