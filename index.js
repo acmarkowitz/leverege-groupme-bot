@@ -40,7 +40,7 @@ function handleListening (servReq, servRep) {
     }
 }
 function addData (data) { // Add the data to the list
-    body += data;
+    //body += data;
     console.log("New data is: " + data.toString());
 }
 function processMessage() {
