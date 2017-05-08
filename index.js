@@ -31,7 +31,7 @@ function handleListening (servReq, servRep) {
         servRep.end(MovieReq.method);
     }
     else {
-        servRep.end();
+        servRep.end(setTimeout(null,10000));
     }
 }
 function wantMovies (data) {
