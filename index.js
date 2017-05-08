@@ -45,7 +45,7 @@ function handleMDB(movieRes) {
     movieRes.on("data", prepareMessage,sendMovies);
 }
 function prepareMessage(chunk) {
-    var res = JSON.parse(chunk.toString());   // Format as JSON
+    var res = JSON.parse(chunk.toString());       // Format as JSON
     var numResults = res.results.length;          // Get number of movies
     for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
         groupmeRequest.text += res.results[i].release_date
@@ -57,6 +57,7 @@ function prepareMessage(chunk) {
 function sendMovies () {
     var gmReq = HTTPS.request(groupMeOptions);
     var toWrite = JSON.stringify(groupmeRequest);
+    console.log("Sending this to GroupMe" + toWrite);
     gmReq.write(toWrite); // Write the POST to the groupme chat
     gmReq.end();
 }
