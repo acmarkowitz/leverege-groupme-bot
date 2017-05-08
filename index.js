@@ -27,8 +27,8 @@ var server = http.createServer(function (servReq, servRep) {
     var body = '';
     // Has there been a post?
     if (servReq.method == 'POST') {
-       servReq.on('data', addData);
-       servReq.on('end', movieMentioned() ,servRep.end());
+       servReq.on('data', addData(body));
+       servReq.on('end', movieMentioned(body) ,servRep.end());
     }
     else {
     servRep.end();
@@ -60,10 +60,10 @@ function askForMovies(movieRes) {
     movieRes.on("data", pushChunks(chunks));
     movieRes.on("end", findTitles());
 }
-function addData (data) { // Add the data to the list
+function addData (data,body) { // Add the data to the list
     body += data;
 }
-function movieMentioned () {
+function movieMentioned (body) {
     // make all message text lower case for easy comparison
     var text = JSON.parse(body).text.toLocaleLowerCase();
     // If "movie" is in the text...
