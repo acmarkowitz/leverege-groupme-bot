@@ -59,13 +59,13 @@ function prepareMessage(chunk) {
         + "\n";
     }
     sendMovies();
-    console.log("Done formatting");
+    //console.log("Done formatting");
 }
 function sendMovies () {
-    console.log("getting ready to send movies");
+    //console.log("getting ready to send movies");
     var gmReq = HTTPS.request(groupMeOptions);
     var toWrite = JSON.stringify(groupmeRequest);
-    console.log("Sending this to GroupMe" + toWrite);
+    //console.log("Sending this to GroupMe" + toWrite);
     gmReq.write(toWrite); // Write the POST to the groupme chat
     gmReq.end();
 }
