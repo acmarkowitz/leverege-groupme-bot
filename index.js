@@ -5,15 +5,15 @@ var qs = require('querystring');
 var http = require('http');
 var request = require('request');
 
-var server = http.createServer(function (request, response) {
-    console.log("Request method is: " + request.method);
+var server = http.createServer(function (req, response) {
+    console.log("Request method is: " + req.method);
     var body;
                                
-    if (request.method == 'POST') {
-       request.on('data', function (data) {
+    if (req.method == 'POST') {
+       req.on('data', function (data) {
           body = JSON.parse(data);
        });
-       request.on('end', function () {
+       req.on('end', function () {
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
               console.log("Yes");
