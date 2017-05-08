@@ -10,7 +10,7 @@ var options = {
 };
 
 var server = http.createServer(function (request, response) {
-    console.log("Request method is: " + req.method);
+    console.log("Request method is: " + request.method);
     var body;
                                
     if (request.method == 'POST') {
