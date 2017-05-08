@@ -45,6 +45,7 @@ function handleMDB(movieRes) {
     movieRes.on("data", prepareMessage,sendMovies);
 }
 function prepareMessage(chunk) {
+    console.log("preparing message");
     var res = JSON.parse(chunk.toString());       // Format as JSON
     var numResults = res.results.length;          // Get number of movies
     for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
