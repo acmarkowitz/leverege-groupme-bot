@@ -26,8 +26,8 @@ var server = http.createServer(handleListening).listen(process.env.PORT || 5000)
 function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', wantMovies);
-        servRep.end();
+        servReq.on('data', wantMovies,servRep.end());
+        
     }
     else {
         servRep.end();
