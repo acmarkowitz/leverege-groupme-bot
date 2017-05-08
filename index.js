@@ -41,16 +41,16 @@ function getMovies() {
     movieReq.write("{}");
     movieReq.end();
 }
-var server = http.createServer(function (request, response) {
-    console.log("Request method is: " + request.method);
+var server = http.createServer(function (servReq, servRep) {
+    console.log("Request method is: " + servReq.method);
     var body = '';
                                
-    if (request.method == 'POST') {
-       request.on('data', function (data) {
+    if (servReq.method == 'POST') {
+       servReq.on('data', function (data) {
           body += data;
                   console.log(data);
        });
-       request.on('end', function () {
+       servReq.on('end', function () {
           var text = JSON.parse(body).text.toLocaleLowerCase();
                   console.log(text);
           if (text.search("movie") != -1) {
@@ -66,5 +66,5 @@ var server = http.createServer(function (request, response) {
           }
        });
     }
-    response.end();
+    servRep.end();
 }).listen(process.env.PORT || 5000);
