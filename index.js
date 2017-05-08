@@ -27,21 +27,8 @@ var server = http.createServer(function (servReq, servRep) {
     var body = '';
     // Has there been a post?
     if (servReq.method == 'POST') {
-       servReq.on('data', function (data) { // Add the data to the list
-          body += data;
-       });
-       servReq.on('end', function () {
-          // make all message text lower case for easy comparison
-          var text = JSON.parse(body).text.toLocaleLowerCase();
-          // If "movie" is in the text...
-          if (text.search("movie") != -1) {
-              getMovies(); // get the upcoming releases, add them to GroupMe text
-              var gmReq = HTTPS.request(options);
-              var toWrite = JSON.stringify(groupmeRequest);
-              gmReq.write(toWrite); // Write the POST to the groupme chat
-              gmReq.end();
-          }
-       },servRep.end());
+       servReq.on('data', addData);
+       servReq.on('end', movieMentioned() ,servRep.end());
     }
     else {
     servRep.end();
@@ -72,4 +59,19 @@ function askForMovies(movieRes) {
     var chunks = [];
     movieRes.on("data", pushChunks(chunks));
     movieRes.on("end", findTitles());
+}
+function addData (data) { // Add the data to the list
+    body += data;
+}
+function movieMentioned () {
+    // make all message text lower case for easy comparison
+    var text = JSON.parse(body).text.toLocaleLowerCase();
+    // If "movie" is in the text...
+    if (text.search("movie") != -1) {
+        getMovies(); // get the upcoming releases, add them to GroupMe text
+        var gmReq = HTTPS.request(options);
+        var toWrite = JSON.stringify(groupmeRequest);
+        gmReq.write(toWrite); // Write the POST to the groupme chat
+        gmReq.end();
+    }
 }
