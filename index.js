@@ -28,10 +28,10 @@ function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
-        servRep.end(MovieReq.method);
+        servRep.end(setTimeout(null,10000));
     }
     else {
-        servRep.end(setTimeout(null,10000));
+        servRep.end();
     }
 }
 function wantMovies (data) {
