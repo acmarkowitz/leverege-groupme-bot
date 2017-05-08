@@ -27,6 +27,7 @@ function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
+        servRep.end();
     }
     else {
         servRep.end();
@@ -41,7 +42,6 @@ function wantMovies (data) {
         movieReq.write("{}"); // Complete the request
         movieReq.end();
     }
-    servRep.end();
 }
 function handleMDB(movieRes) {
     movieRes.on("data", prepareMessage);
