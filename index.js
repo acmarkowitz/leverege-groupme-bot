@@ -32,8 +32,8 @@ function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         console.log("There has been a post");
-        servReq.on('data', addData);
-        servReq.on('end', processMessage, servRep.end());
+        servReq.on('data', addData,servRep.end);
+        //servReq.on('end', processMessage, servRep.end());
     }
     else {
         servRep.end();
@@ -42,6 +42,7 @@ function handleListening (servReq, servRep) {
 function addData (data) { // Add the data to the list
     console.log("New data is: " + data);
     body += data;
+    processMessage();
 }
 function processMessage() {
     // make all message text lower case for easy comparison
