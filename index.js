@@ -26,7 +26,7 @@ var server = http.createServer(handleListening).listen(process.env.PORT || 5000)
 function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', wantMovies, servRep.end);
+        servReq.on('data', wantMovies);
     }
     else {
         servRep.end();
@@ -36,10 +36,12 @@ function wantMovies (data) {
     var groupMeMessage = JSON.parse(data).text.toLocaleLowerCase();
     // If "movie" is in the text...
     if (groupMeMessage.search("movie") != -1) {
+        groupmeRequest.text = "Upcoming releases:\n";
         var movieReq = HTTPS.request(movieOptions, handleMDB);
         movieReq.write("{}"); // Complete the request
         movieReq.end();
     }
+    servRep.end();
 }
 function handleMDB(movieRes) {
     movieRes.on("data", prepareMessage);
