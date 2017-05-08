@@ -28,7 +28,7 @@ var server = http.createServer(function (request, response) {
        var chunks = [];
                                                            
        movieRes.on("data", function (chunk) {
-          chunks.push(chunk);
+          chunks.push(JSON.stringify(chunk));
        });
                                                            
        movieRes.on("end", function () {
