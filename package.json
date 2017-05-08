@@ -1,6 +1,6 @@
 {
   "name": "leverege-groupme-bot",
-  "version": "0.2.6",
+  "version": “1”,
   "description": "My node code for Leverege bot",
   "engines": {
     "node": "6.10.2"
