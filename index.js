@@ -41,7 +41,7 @@ function handleListening (servReq, servRep) {
 }
 function addData (data) { // Add the data to the list
     body += data;
-    console.log(data.toString());
+    console.log("New data is: " + data.toString());
 }
 function processMessage() {
     // make all message text lower case for easy comparison
