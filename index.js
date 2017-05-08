@@ -50,9 +50,7 @@ function handleListening (servReq, servRep) {
     var body = '';
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', function (data) { // Add the data to the list
-                   body += data;
-                   });
+        servReq.on('data', addData(body));
         servReq.on('end', function () {
                    // make all message text lower case for easy comparison
                    var text = JSON.parse(body).text.toLocaleLowerCase();
@@ -69,4 +67,7 @@ function handleListening (servReq, servRep) {
     else {
         servRep.end();
     }
+}
+function addData (data,body) { // Add the data to the list
+    body += data;
 }
