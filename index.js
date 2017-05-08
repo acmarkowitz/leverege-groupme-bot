@@ -68,6 +68,6 @@ var server = http.createServer(function (servReq, servRep) {
     }
 }).listen(process.env.PORT || 5000);
 
-function pushChunks(chunks, chunk) {
+function pushChunks(chunk, chunks) {
     chunks.push(chunk);
 }
