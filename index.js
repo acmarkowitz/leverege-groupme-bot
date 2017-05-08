@@ -51,13 +51,13 @@ var server = http.createServer(function (request, response) {
        });
        request.on('end', function () {
           var text = JSON.parse(body).text.toLocaleLowerCase();
+                  console.log(text);
           if (text.search("movie") != -1) {
               console.log("Yes");
               getMovies();
-              var gmReq = HTTPS.request(options); //, callback);
+              var gmReq = HTTPS.request(options);
               var toWrite = JSON.stringify(groupmeRequest);
               gmReq.write(toWrite);
-              //console.log(toWrite);
               gmReq.end();
           }
           else {
@@ -65,6 +65,5 @@ var server = http.createServer(function (request, response) {
           }
        });
     }
-    //response.statusCode = 400;
     response.end();
 }).listen(process.env.PORT || 5000);
