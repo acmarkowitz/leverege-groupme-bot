@@ -28,7 +28,7 @@ function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
-        servRep.end(wastTime());
+        servRep.end(wasteTime());
     }
     else {
         servRep.end();
