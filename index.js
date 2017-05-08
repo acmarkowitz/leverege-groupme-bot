@@ -33,7 +33,7 @@ var server = http.createServer(function (request, response) {
                                                            
        movieRes.on("end", function () {
           var movieBody = Buffer.concat(chunks);
-          console.log(JSON.stringify(movieBody));
+          console.log(JSON.stringify(movieBody.toString()));
        });
     });
                                
