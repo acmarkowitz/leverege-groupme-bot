@@ -21,7 +21,7 @@ var groupmeRequest =
 };
 
 function getMovies() {
-    var movieReq = http.request(movieOptions, function (movieRes) {
+    var movieReq = HTTPS.request(movieOptions, function (movieRes) {
        var chunks = [];
        movieRes.on("data", function (chunk) {
           chunks.push(chunk);
