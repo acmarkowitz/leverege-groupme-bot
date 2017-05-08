@@ -8,6 +8,13 @@ var options = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'}
 };
+var movieOptions = {
+    "method": "GET",
+    "hostname": "api.themoviedb.org",
+    "port": null,
+    "path": "/3/movie/upcoming?page=1&language=en-US&api_key=059eb0be9524d13c1469b5ed1e1155f1",
+    "headers": {}
+};
 var groupmeRequest =
 {
     bot_id: "2ae846f9593ef32b98600483ea",
