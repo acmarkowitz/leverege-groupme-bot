@@ -28,7 +28,9 @@ function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
-        servRep.end(wasteTime());
+        setTimeout(function() {;
+                   servRep.end();
+                   }, 10000);
     }
     else {
         servRep.end();
@@ -66,9 +68,4 @@ function sendMovies () {
     console.log("Sending this to GroupMe" + toWrite);
     gmReq.write(toWrite); // Write the POST to the groupme chat
     gmReq.end();
-}
-function wasteTime() {
-    var blah = "blahblah";
-    setTimeout(blah = blah.substring(0,3),10000);
-    return blah;
 }
