@@ -1,4 +1,3 @@
-var qs = require('querystring');
 var http = require('http');
 var HTTPS = require('https');
 
@@ -22,31 +21,26 @@ var groupmeRequest =
 };
 
 function getMovies() {
-    
     var movieReq = http.request(movieOptions, function (movieRes) {
-                                var chunks = [];
-                                
-                                movieRes.on("data", function (chunk) {
-                                            chunks.push(chunk);
-                                            });
-                                
-                                movieRes.on("end", function () {
-                                            var movieBody = Buffer.concat(chunks);
-                                            var res = JSON.parse(movieBody.toString());
-                                            var numResults = res.results.length;
-                                            for (var i = 0; i < numResults; i++) {
-                                            groupmeRequest.text += res.results[i].release_date
-                                            + ": "
-                                            + res.results[i].title
-                                            + "\n";
-                                            }
-                                            });
-                                });
-    
+       var chunks = [];
+       movieRes.on("data", function (chunk) {
+          chunks.push(chunk);
+       });
+       movieRes.on("end", function () {
+          var movieBody = Buffer.concat(chunks);
+          var res = JSON.parse(movieBody.toString());
+          var numResults = res.results.length;
+          for (var i = 0; i < numResults; i++) {
+             groupmeRequest.text += res.results[i].release_date
+                                 + ": "
+                                 + res.results[i].title
+                                 + "\n";
+          }
+       });
+    });
     movieReq.write("{}");
     movieReq.end();
 }
-
 var server = http.createServer(function (request, response) {
     console.log("Request method is: " + request.method);
     var body;
@@ -74,5 +68,3 @@ var server = http.createServer(function (request, response) {
     //response.statusCode = 400;
     response.end();
 }).listen(process.env.PORT || 5000);
-
-//console.log("Hello World");
