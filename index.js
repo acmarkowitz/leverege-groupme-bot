@@ -32,8 +32,8 @@ function handleListening (servReq, servRep) {
     console.log("request");
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', addData);
-        servReq.on('end', processMessage,servRep.end());
+        servReq.on('data', addData,processMessage());
+        servReq.on('end', servRep.end());
     }
     else {
         servRep.end();
