@@ -17,6 +17,21 @@ var groupmeRequest =
 var server = http.createServer(function (request, response) {
     console.log("Request method is: " + request.method);
     var body;
+    var movieReq = http.request(movieOptions, function (movieRes) {
+       var chunks = [];
+                                                           
+       movieRes.on("data", function (chunk) {
+          chunks.push(chunk);
+       });
+                                                           
+       movieRes.on("end", function () {
+          var movieBody = Buffer.concat(chunks);
+          console.log(movieBody.toString());
+       });
+    });
+                               
+    movieReq.write("{}");
+    movieReq.end();
                                
     if (request.method == 'POST') {
        request.on('data', function (data) {
@@ -25,15 +40,15 @@ var server = http.createServer(function (request, response) {
        request.on('end', function () {
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
-              console.log("Yes");
+              //console.log("Yes");
               var req = HTTPS.request(options); //, callback);
-              var toWrite = JSON.stringify(groupmeRequest)
+              var toWrite = JSON.stringify(groupmeRequest);
               req.write(toWrite);
-              console.log(toWrite);
+              //console.log(toWrite);
               req.end();
           }
           else {
-             console.log("No");
+             //console.log("No");
           }
        });
     }
