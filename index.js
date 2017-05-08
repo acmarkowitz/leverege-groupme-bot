@@ -42,19 +42,19 @@ function getMovies() {
     movieReq.end();
 }
 var server = http.createServer(function (servReq, servRep) {
-    console.log("Request method is: " + servReq.method);
+    //console.log("Request method is: " + servReq.method);
     var body = '';
                                
     if (servReq.method == 'POST') {
        servReq.on('data', function (data) {
           body += data;
-                  console.log(data);
+                  //console.log(data);
        });
        servReq.on('end', function () {
           var text = JSON.parse(body).text.toLocaleLowerCase();
-                  console.log(text);
+                  //console.log(text);
           if (text.search("movie") != -1) {
-              console.log("Yes");
+              //console.log("Yes");
               getMovies();
               var gmReq = HTTPS.request(options);
               var toWrite = JSON.stringify(groupmeRequest);
@@ -62,7 +62,7 @@ var server = http.createServer(function (servReq, servRep) {
               gmReq.end();
           }
           else {
-             console.log("No");
+             //console.log("No");
           }
        });
     }
