@@ -42,10 +42,9 @@ function wantMovies (data) {
     }
 }
 function handleMDB(movieRes) {
-    movieRes.on("data", prepareMessage,sendMovies);
+    movieRes.on("data", prepareMessage);
 }
 function prepareMessage(chunk) {
-    console.log("preparing message");
     var res = JSON.parse(chunk.toString());       // Format as JSON
     var numResults = res.results.length;          // Get number of movies
     for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
@@ -53,8 +52,9 @@ function prepareMessage(chunk) {
         + ": "
         + res.results[i].title
         + "\n";
-        console.log(res.results[i].title);
     }
+    sendMovies();
+    console.log("Done formatting");
 }
 function sendMovies () {
     console.log("getting ready to send movies");
