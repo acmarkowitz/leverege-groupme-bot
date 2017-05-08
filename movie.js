@@ -13,24 +13,28 @@ bot_id: "2ae846f9593ef32b98600483ea",
 text: ""
 };
 
-var movieReq = http.request(movieOptions, function (movieRes) {
-   var chunks = [];
-                       
-   movieRes.on("data", function (chunk) {
-      chunks.push(chunk);
-   });
-                       
-   movieRes.on("end", function () {
-      var movieBody = Buffer.concat(chunks);
-               var res = JSON.parse(movieBody.toString());
-               var numResults = res.results.length;
-               for (var i = 0; i < numResults; i++) {
-               groupmeRequest.text += res.results[i].release_date + ": " + res.results[i].title + "\n";
-               }
-                            console.log(groupmeRequest.text);
-               //console.log(JSON.parse(movieBody.toString()).results.length);
-   });
-});
+function getMovies() {
+    var movieReq = http.request(movieOptions, function (movieRes) {
+                                var chunks = [];
+                                
+                                movieRes.on("data", function (chunk) {
+                                            chunks.push(chunk);
+                                            });
+                                
+                                movieRes.on("end", function () {
+                                            var movieBody = Buffer.concat(chunks);
+                                            var res = JSON.parse(movieBody.toString());
+                                            var numResults = res.results.length;
+                                            for (var i = 0; i < numResults; i++) {
+                                            groupmeRequest.text += res.results[i].release_date + ": " + res.results[i].title + "\n";
+                                            }
+                                            console.log(groupmeRequest.text);
+                                            //console.log(JSON.parse(movieBody.toString()).results.length);
+                                            });
+                                });
+    
+    movieReq.write("{}");
+    movieReq.end();
+}
 
-movieReq.write("{}");
-movieReq.end();
+getMovies();
