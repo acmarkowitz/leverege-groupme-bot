@@ -1,10 +1,10 @@
 var qs = require('querystring');
 var http = require('http');
+var HTTPS = require('https');
 
 var options = {
     host: 'https://api.groupme.com',
     path: '/v3/bots/post',
-    port: '80',
     method: 'POST',
     headers: {'Content-Type': 'application/json'}
 };
@@ -21,7 +21,7 @@ var server = http.createServer(function (request, response) {
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
               console.log("Yes");
-              var req = http.request(options); //, callback);
+              var req = HTTPS.request(options); //, callback);
               var toWrite = JSON.stringify({ bot_id: "2ae846f9593ef32b98600483ea",
                                            text: "Hello World" })
               req.write(toWrite);
