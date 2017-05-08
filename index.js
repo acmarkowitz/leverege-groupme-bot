@@ -27,17 +27,7 @@ function getMovies() {
     var movieReq = HTTPS.request(movieOptions, function (movieRes) {
        var chunks = [];
        movieRes.on("data", pushChunks(chunks));
-       movieRes.on("end", function () {
-          var movieBody = Buffer.concat(chunks);
-          var res = JSON.parse(movieBody.toString());   // Format as JSON
-          var numResults = res.results.length;          // Get number of movies
-          for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
-             groupmeRequest.text += res.results[i].release_date
-                                 + ": "
-                                 + res.results[i].title
-                                 + "\n";
-          }
-       });
+       movieRes.on("end", findTitles());
     });
     movieReq.write("{}"); // Complete the request
     movieReq.end();
@@ -70,4 +60,15 @@ var server = http.createServer(function (servReq, servRep) {
 
 function pushChunks(chunk, chunks) {
     chunks.push(chunk);
+}
+function findTitles () {
+    var movieBody = Buffer.concat(chunks);
+    var res = JSON.parse(movieBody.toString());   // Format as JSON
+    var numResults = res.results.length;          // Get number of movies
+    for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
+        groupmeRequest.text += res.results[i].release_date
+        + ": "
+        + res.results[i].title
+        + "\n";
+    }
 }
