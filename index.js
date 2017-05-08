@@ -2,7 +2,7 @@ var qs = require('querystring');
 var http = require('http');
 
 var options = {
-    host: 'api.groupme.com',
+    host: 'https://api.groupme.com',
     path: '/v3/bots/post',
     port: '80',
     method: 'POST',
