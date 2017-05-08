@@ -22,7 +22,9 @@ var server = http.createServer(function (request, response) {
           if (text.search("movie") != -1) {
               console.log("Yes");
               var req = http.request(options); //, callback);
-              req.write(JSON.stringify({ bot_id: "2ae846f9593ef32b98600483ea", text: "Hello World" }));
+              var toWrite = JSON.stringify({ bot_id: "2ae846f9593ef32b98600483ea", text: "Hello World" })
+              req.write(toWrite);
+              console.log(toWrite);
               req.end();
           }
           else {
