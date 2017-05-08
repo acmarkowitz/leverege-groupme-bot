@@ -17,22 +17,6 @@ var server = http.createServer(function (req, response) {
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
               console.log("Yes");
-              // Configure the request
-              var options = {
-              hostname: 'api.groupme.com',
-              path: '/v3/bots/post',
-              method: 'POST',
-              headers: 'Content-Type: application/json',
-              form: {'bot_id': '2ae846f9593ef32b98600483ea',
-                  'text': 'Yes, movie'}
-              // Start the request
-              http.request(options, function (error, resp, bd) {
-                    if (!error && resp.statusCode == 200) {
-                    // Print out the response body
-                    console.log(bd)
-                    }
-              })
-          }
           }
           else {
              console.log("No");
