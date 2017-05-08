@@ -48,6 +48,7 @@ var server = http.createServer(function (request, response) {
     if (request.method == 'POST') {
        request.on('data', function (data) {
           body += data;
+                  console.log(data);
        });
        request.on('end', function () {
           var text = JSON.parse(body).text.toLocaleLowerCase();
