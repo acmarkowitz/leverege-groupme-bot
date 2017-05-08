@@ -21,14 +21,14 @@ var groupmeRequest = {
     bot_id: "2ae846f9593ef32b98600483ea",
     text: "Upcoming releases:\n"
 };
+var MovieReq;
 // Run server to listen for groupme messages
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
-        servRep.writeHead(200);
-        setTimeout(servRep.end(),10000);
+        servRep.end(MovieReq.method);
     }
     else {
         servRep.end();
@@ -39,7 +39,7 @@ function wantMovies (data) {
     // If "movie" is in the text...
     if (groupMeMessage.search("movie") != -1) {
         groupmeRequest.text = "Upcoming releases:\n";
-        var movieReq = HTTPS.request(movieOptions, handleMDB);
+        movieReq = HTTPS.request(movieOptions, handleMDB);
         movieReq.write("{}"); // Complete the request
         movieReq.end();
     }
