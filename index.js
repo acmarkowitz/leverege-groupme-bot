@@ -31,7 +31,7 @@ function handleListening (servReq, servRep) {
     body = '';
     // Has there been a post?
     if (servReq.method == 'POST') {
-        servReq.on('data', addData,processMessage,servRep.end());
+        servReq.on('data', addData,servRep.end());
         //servReq.on('end', processMessage,servRep.end());
     }
     else {
@@ -39,7 +39,17 @@ function handleListening (servReq, servRep) {
     }
 }
 function addData (data) { // Add the data to the list
-    body += data;
+    // body += data;
+    // make all message text lower case for easy comparison
+    var text = JSON.parse(data).text.toLocaleLowerCase();
+    // If "movie" is in the text...
+    if (text.search("movie") != -1) {
+        getMovies(); // get the upcoming releases, add them to GroupMe text
+        var gmReq = HTTPS.request(options);
+        var toWrite = JSON.stringify(groupmeRequest);
+        gmReq.write(toWrite); // Write the POST to the groupme chat
+        gmReq.end();
+    }
 }
 function processMessage() {
     // make all message text lower case for easy comparison
