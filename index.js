@@ -3,7 +3,7 @@
  */
 var qs = require('querystring');
 var http = require('http');
-var request = require('request');
+var rq = require('request');
 
 var server = http.createServer(function (req, response) {
     console.log("Request method is: " + req.method);
@@ -25,7 +25,7 @@ var server = http.createServer(function (req, response) {
               form: {'bot_id': '2ae846f9593ef32b98600483ea',
                   'text': 'Yes, movie'}
               // Start the request
-              request(options, function (error, resp, bd) {
+              rq(options, function (error, resp, bd) {
                     if (!error && resp.statusCode == 200) {
                     // Print out the response body
                     console.log(bd)
