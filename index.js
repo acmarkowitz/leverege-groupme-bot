@@ -6,7 +6,7 @@ var options = {
     path: '/v3/bots/post',
     port: '80',
     method: 'POST',
-    headers: {'Content-Type: application/json'}
+    headers: {'Content-Type': 'application/json'}
 };
 
 var server = http.createServer(function (request, response) {
