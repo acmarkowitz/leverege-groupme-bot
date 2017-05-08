@@ -18,7 +18,7 @@ var movieOptions = {
 var groupmeRequest =
 {
     bot_id: "2ae846f9593ef32b98600483ea",
-    text: "Hello World"
+    text: "Upcoming releases:\n"
 };
 
 var server = http.createServer(function (request, response) {
@@ -36,7 +36,10 @@ var server = http.createServer(function (request, response) {
           var res = JSON.parse(movieBody.toString());
           var numResults = res.results.length;
           for (var i = 0; i < numResults; i++) {
-             console.log(res.results[i].release_date + ": " + res.results[i].title);
+             groupmeRequest.text += res.results[i].release_date
+                   + ": "
+                   + res.results[i].title
+                   + "\n";
           }
        });
     });

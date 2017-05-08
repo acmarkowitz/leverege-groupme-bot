@@ -7,6 +7,11 @@ var movieOptions = {
     "path": "/3/movie/upcoming?region=US&page=1&language=en-US&api_key=059eb0be9524d13c1469b5ed1e1155f1",
     "headers": {}
 };
+var groupmeRequest =
+{
+bot_id: "2ae846f9593ef32b98600483ea",
+text: ""
+};
 
 var movieReq = http.request(movieOptions, function (movieRes) {
    var chunks = [];
@@ -20,8 +25,9 @@ var movieReq = http.request(movieOptions, function (movieRes) {
                var res = JSON.parse(movieBody.toString());
                var numResults = res.results.length;
                for (var i = 0; i < numResults; i++) {
-               console.log(res.results[i].release_date + ": " + res.results[i].title);
+               groupmeRequest.text += res.results[i].release_date + ": " + res.results[i].title + "\n";
                }
+                            console.log(groupmeRequest.text);
                //console.log(JSON.parse(movieBody.toString()).results.length);
    });
 });
