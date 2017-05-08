@@ -63,7 +63,7 @@ var server = http.createServer(function (servReq, servRep) {
               gmReq.write(toWrite); // Write the POST to the groupme chat
               gmReq.end();
           }
-       },servRep.end(););
+       },servRep.end());
     }
     else {
     servRep.end();
