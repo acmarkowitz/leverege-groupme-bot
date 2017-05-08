@@ -40,8 +40,8 @@ function handleListening (servReq, servRep) {
     }
 }
 function addData (data) { // Add the data to the list
-    //body += data;
-    console.log("New data is: " + data.toString());
+    console.log("New data is: " + data);
+    body += data;
 }
 function processMessage() {
     // make all message text lower case for easy comparison
