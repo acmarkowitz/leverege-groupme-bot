@@ -43,14 +43,14 @@ function getMovies() {
 }
 var server = http.createServer(function (request, response) {
     console.log("Request method is: " + request.method);
-    var body;
+    var body = '';
                                
     if (request.method == 'POST') {
        request.on('data', function (data) {
-          body = JSON.parse(data);
+          body += data;
        });
        request.on('end', function () {
-          var text = body.text.toLocaleLowerCase();
+          var text = JSON.parse(body).text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
               console.log("Yes");
               getMovies();
