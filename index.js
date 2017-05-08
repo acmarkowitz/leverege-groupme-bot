@@ -1,9 +1,13 @@
-/* HTTP-post input handling from answer 2 at 
- http://stackoverflow.com/questions/4295782/how-do-you-extract-post-data-in-node-js
- */
 var qs = require('querystring');
 var http = require('http');
-//var rq = require('request');
+
+var options = {
+    host: 'api.groupme.com',
+    path: '/v3/bots/post',
+    port: '80',
+    method: 'POST',
+    headers: {'custom': 'Custom Header Demo works'}
+};
 
 var server = http.createServer(function (req, response) {
     console.log("Request method is: " + req.method);
@@ -17,6 +21,9 @@ var server = http.createServer(function (req, response) {
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
               console.log("Yes");
+              var req = http.request(options); //, callback);
+              req.write(JSON.stringify(({ bot_id: 2ae846f9593ef32b98600483ea, text: "Hello World" })
+              req.end();
           }
           else {
              console.log("No");
