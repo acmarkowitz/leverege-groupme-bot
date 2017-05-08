@@ -54,7 +54,7 @@ var server = http.createServer(function (request, response) {
        request.on('end', function () {
           var text = body.text.toLocaleLowerCase();
           if (text.search("movie") != -1) {
-              //console.log("Yes");
+              console.log("Yes");
               var req = HTTPS.request(options); //, callback);
               var toWrite = JSON.stringify(groupmeRequest);
               req.write(toWrite);
@@ -62,7 +62,7 @@ var server = http.createServer(function (request, response) {
               req.end();
           }
           else {
-             //console.log("No");
+             console.log("No");
           }
        });
     }
