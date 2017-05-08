@@ -46,6 +46,7 @@ function addData (data) { // Add the data to the list
 }
 function processMessage() {
     // make all message text lower case for easy comparison
+    console.log("Body data is: " + body);
     var text = JSON.parse(body).text.toLocaleLowerCase();
     // If "movie" is in the text...
     if (text.search("movie") != -1) {
