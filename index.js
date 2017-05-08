@@ -22,16 +22,6 @@ var groupmeRequest =
     bot_id: "2ae846f9593ef32b98600483ea",
     text: "Upcoming releases:\n"
 };
-// Get the upcoming releases in the US when it is time; code from example on moviedb.org
-function getMovies() {
-    var movieReq = HTTPS.request(movieOptions, function (movieRes) {
-       var chunks = [];
-       movieRes.on("data", pushChunks(chunks));
-       movieRes.on("end", findTitles());
-    });
-    movieReq.write("{}"); // Complete the request
-    movieReq.end();
-}
 // Run server to listen for groupme messages
 var server = http.createServer(function (servReq, servRep) {
     var body = '';
@@ -58,6 +48,12 @@ var server = http.createServer(function (servReq, servRep) {
     }
 }).listen(process.env.PORT || 5000);
 
+// Get the upcoming releases in the US when it is time; code from example on moviedb.org
+function getMovies() {
+    var movieReq = HTTPS.request(movieOptions, askForMovies());
+    movieReq.write("{}"); // Complete the request
+    movieReq.end();
+}
 function pushChunks(chunk, chunks) {
     chunks.push(chunk);
 }
@@ -71,4 +67,9 @@ function findTitles () {
         + res.results[i].title
         + "\n";
     }
+}
+function askForMovies(movieRes) {
+    var chunks = [];
+    movieRes.on("data", pushChunks(chunks));
+    movieRes.on("end", findTitles());
 }
