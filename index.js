@@ -22,13 +22,12 @@ var groupmeRequest = {
     text: "Upcoming releases:\n"
 };
 // Run server to listen for groupme messages
+var servReq, servRep;
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', wantMovies);
-        servReq.on('end',servRep.end);
-        
     }
     else {
         servRep.end();
@@ -42,6 +41,7 @@ function wantMovies (data) {
         var movieReq = HTTPS.request(movieOptions, handleMDB);
         movieReq.write("{}"); // Complete the request
         movieReq.end();
+        servRep.end();
     }
 }
 function handleMDB(movieRes) {
