@@ -45,8 +45,7 @@ function getMovies() {
     movieReq.end();
 }
 // Run server to listen for groupme messages
-var server = http.createServer(handleListening(servReq,servResp)).listen(process.env.PORT || 5000);
-
+var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
     var body = '';
     // Has there been a post?
