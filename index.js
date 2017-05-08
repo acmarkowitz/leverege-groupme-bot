@@ -3,7 +3,7 @@ var http = require('http');
 var HTTPS = require('https');
 
 var options = {
-    host: 'https://api.groupme.com',
+    host: 'api.groupme.com',
     path: '/v3/bots/post',
     method: 'POST',
     headers: {'Content-Type': 'application/json'}
