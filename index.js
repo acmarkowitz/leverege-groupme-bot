@@ -22,7 +22,6 @@ var groupmeRequest =
     bot_id: "2ae846f9593ef32b98600483ea",
     text: "Upcoming releases:\n"
 };
-var chunks;
 // Run server to listen for groupme messages
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
@@ -49,14 +48,22 @@ function wantMovies (data) {
     }
 }
 function handleMDB(movieRes) {
-    chunks = [];
-    movieRes.on("data", addChunk);
-    movieRes.on("end", prepareMessage);
+    movieRes.on("data", prepareMessage);
+    //movieRes.on("end", prepareMessage);
 }
-function addChunk(chunk) {
-    console.log("data from 1 chunk:" + chunk);
+function prepareMessage(chunk) {
     chunks.push(chunk);
+    var movieBody = Buffer.concat(chunk);
+    var res = JSON.parse(movieBody.toString());   // Format as JSON
+    var numResults = res.results.length;          // Get number of movies
+    for (var i = 0; i < numResults; i++) {        // Iterate over movies for title, date
+        groupmeRequest.text += res.results[i].release_date
+        + ": "
+        + res.results[i].title
+        + "\n";
+    }
 }
+/*
 function prepareMessage() {
     var movieBody = Buffer.concat(chunks);
     var res = JSON.parse(movieBody.toString());   // Format as JSON
@@ -67,4 +74,4 @@ function prepareMessage() {
         + res.results[i].title
         + "\n";
     }
-}
+} */
