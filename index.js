@@ -29,6 +29,7 @@ var chunks;
 var server = http.createServer(handleListening).listen(process.env.PORT || 5000);
 function handleListening (servReq, servRep) {
     body = '';
+    console.log("request");
     // Has there been a post?
     if (servReq.method == 'POST') {
         servReq.on('data', addData);
@@ -40,6 +41,7 @@ function handleListening (servReq, servRep) {
 }
 function addData (data) { // Add the data to the list
     body += data;
+    console.log(data.toString());
 }
 function processMessage() {
     // make all message text lower case for easy comparison
@@ -51,6 +53,7 @@ function processMessage() {
         movieReq.end();
         var gmReq = HTTPS.request(options);
         var toWrite = JSON.stringify(groupmeRequest);
+        console.log(toWrite);
         gmReq.write(toWrite); // Write the POST to the groupme chat
         gmReq.end();
     }
